@@ -12,8 +12,9 @@ class DockingStation
 		@available_bikes.pop()
 	end
 	#takes in a bike and docks it
-	def dock(bike)
+	def dock(bike, condition= 'working')
 		fail 'Dock is full' if self.full?
+		bike.report_condition(condition)
 		@available_bikes.append(bike)
 		@available_bikes[@available_bikes.length - 1]
 	end
