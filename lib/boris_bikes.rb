@@ -45,6 +45,9 @@ class Bike
 			false
 		end
 	end
+	def report_condition(status)
+		@bike_condition = status
+	end
 
 	
 end
