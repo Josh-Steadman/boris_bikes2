@@ -35,7 +35,16 @@ class DockingStation
 end
 
 class Bike
-	def working?
-		true
+	def initialize(bike_condition= 'working')
+	@bike_condition = bike_condition
 	end
+	def working?
+		if @bike_condition == 'working'
+			true
+		else
+			false
+		end
+	end
+
+	
 end
