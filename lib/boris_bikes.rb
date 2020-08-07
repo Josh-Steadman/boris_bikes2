@@ -8,12 +8,17 @@ class DockingStation
 	end
 	#releases bikes
 	def release_bike
-		fail 'No bikes available' if  self.empty?
-		@available_bikes.pop()
+		fail 'No bikes available' if empty?
+		@available_bikes.each do |bike|
+			if bike.working?
+				@available_bikes.delete(bike)
+			end	
+		end 
+		fail 'All available bikes are broken'
 	end
 	#takes in a bike and docks it
 	def dock(bike, condition= 'working')
-		fail 'Dock is full' if self.full?
+		fail 'Dock is full' if full?
 		bike.report_condition(condition)
 		@available_bikes.append(bike)
 		@available_bikes[@available_bikes.length - 1]
@@ -23,13 +28,16 @@ class DockingStation
 
 	private
 	def full?
-		@available_bikes.count >= DEFAULT_CAPACITY
+	 if	@available_bikes.count >= DEFAULT_CAPACITY
+		true
+	 end
 	end
 
 	private
 	def empty?
-		 @available_bikes.empty?
-		
+		if @available_bikes.empty?
+			true
+		end
 	end
 
 
